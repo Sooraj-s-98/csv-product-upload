@@ -4,6 +4,9 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('_middleware/error-handler');
+const authorize = require('_middleware/authorize');
+
+global.__basedir = __dirname + "/..";
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -11,6 +14,7 @@ app.use(cors());
 
 // api routes
 app.use('/users', require('./users/users.controller'));
+app.use('/product',authorize(),  require('./product/product.routes') );
 
 // global error handler
 app.use(errorHandler);

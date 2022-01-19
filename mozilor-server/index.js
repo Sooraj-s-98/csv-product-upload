@@ -1,32 +1,20 @@
-// index.js
+﻿require('rootpath')();
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const errorHandler = require('_middleware/error-handler');
 
-/**
- * Required External Modules
- */
- const express = require("express");
- const path = require("path");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
-/**
- * App Variables
- */
- const app = express();
- const port = process.env.PORT || "3030";
+// api routes
+app.use('/users', require('./users/users.controller'));
 
-/**
- *  App Configuration
- */
+// global error handler
+app.use(errorHandler);
 
-/**
- * Routes Definitions
- */
- app.get("/", (req, res) => {
-    res.status(200).send("test passed");
-  });
-
-/**
- * Server Activation
- */
-
- app.listen(port, () => {
-    console.log(`Listening to requests on http://localhost:${port}`);
-  });
+// start server
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 4000;
+app.listen(port, () => console.log('Server listening on port ' + port));

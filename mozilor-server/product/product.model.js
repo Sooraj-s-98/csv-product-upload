@@ -8,6 +8,7 @@ function model(sequelize) {
         sku: { type: DataTypes.STRING, allowNull: false },
         price: { type: DataTypes.FLOAT(11), allowNull: false },
         description: { type: DataTypes.STRING, allowNull: true },
+        user_id:{type: DataTypes.INTEGER, allowNull: false}
     };
 
     return sequelize.define('Product', attributes);

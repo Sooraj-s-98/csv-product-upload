@@ -1,8 +1,8 @@
 const db = require('_helpers/db');
 const Products = db.Products;
-
 const fs = require("fs");
 const csv = require("fast-csv");
+const productService = require('./product.service');
 
 const upload = async (req, res) => {
   try {
@@ -11,7 +11,7 @@ const upload = async (req, res) => {
     }
 
     let products = [];
-    let path = __basedir + "/upload/" + req.file.filename;
+    let path = req.file.path;
 
     fs.createReadStream(path)
       .pipe(csv.parse({ headers: true }))
@@ -20,10 +20,11 @@ const upload = async (req, res) => {
       })
       .on("data", (row) => {
         console.log("row",row);
-        Products.push(row);
+        products.push(row);
       })
       .on("end", () => {
-        Products.bulkCreate(products)
+
+        productService.checkProductShema(products, req.user.id)
           .then(() => {
             res.status(200).send({
               message:
@@ -57,6 +58,7 @@ const getProducts = (req, res) => {
       });
     });
 };
+
 
 module.exports = {
   upload,

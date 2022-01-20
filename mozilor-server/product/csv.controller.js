@@ -3,6 +3,7 @@ const Products = db.Products;
 const fs = require("fs");
 const csv = require("fast-csv");
 const productService = require('./product.service');
+const { Op } = require("sequelize");
 
 const upload = async (req, res) => {
   try {
@@ -47,8 +48,12 @@ const upload = async (req, res) => {
 };
 
 const getProducts = (req, res) => {
-  Products.findAll()
-    .then((data) => {
+  db.Products.findAll({
+    where: {
+      user_id:req.user.id,
+    },
+    attributes: ["product_name","sku","price","description"]
+  }).then((data) => {
       res.send(data);
     })
     .catch((err) => {

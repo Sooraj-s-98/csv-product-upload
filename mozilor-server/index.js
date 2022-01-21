@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('_middleware/error-handler');
 const authorize = require('_middleware/authorize');
-
+const busboyBodyParser = require('busboy-body-parser');
 global.__basedir = __dirname + "/..";
 
   app.use(function (req, res, next) {
@@ -27,9 +27,11 @@ var corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false  
+  // ,keepExtensions: true, uploadDir: "uploads" 
+}));
 app.use(bodyParser.json());
-
+app.use(busboyBodyParser());
 // api routes
 app.use('/users', require('./users/users.controller'));
 app.use('/product', cors(corsOptions),authorize(),  require('./product/product.routes'));

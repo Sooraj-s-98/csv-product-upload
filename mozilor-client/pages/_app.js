@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { RouteGuard } from '../components';
+import  Nav from '../components/Nav';
 
 export default App;
 
@@ -14,7 +15,7 @@ function App({ Component, pageProps }) {
             </Head>
 
             <div className="app-container bg-light">
-
+            <Nav />
                 <div className="container pt-4 pb-4">
                     <RouteGuard>
                         <Component {...pageProps} />

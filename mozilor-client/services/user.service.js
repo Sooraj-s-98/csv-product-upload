@@ -2,10 +2,11 @@ import { BehaviorSubject } from 'rxjs';
 import getConfig from 'next/config';
 import Router from 'next/router';
 
-import { fetchWrapper } from 'helpers';
+import { fetchWrapper } from '../helpers';
 
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
+const productUrl = `${publicRuntimeConfig.apiUrl}/product`;
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 export const userService = {
@@ -15,6 +16,7 @@ export const userService = {
     logout,
     register,
     update,
+    getProductlist,
     delete: _delete
 };
 
@@ -30,11 +32,16 @@ function login(username, password) {
 function logout() {
     localStorage.removeItem('user');
     userSubject.next(null);
-    Router.push('/account/login');
+    Router.push('/login');
 }
 
 function register(user) {
     return fetchWrapper.post(`${baseUrl}/register`, user);
+}
+
+function getProductlist() {
+    
+    return fetchWrapper.post(`${productUrl}/list`);
 }
 
 

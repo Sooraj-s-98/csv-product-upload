@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
 
-import { userService } from 'services';
+import { userService } from '../services';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -38,7 +38,6 @@ function put(url, body) {
     return fetch(url, requestOptions).then(handleResponse);    
 }
 
-
 function _delete(url) {
     const requestOptions = {
         method: 'DELETE',
@@ -48,14 +47,12 @@ function _delete(url) {
 }
 
 
-
 function authHeader(url) {
-
     const user = userService.userValue;
-    const isLoggedIn = user && user.token;
+    const isLoggedIn = user && user.authdata;
     const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
     if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${user.token}` };
+        return { Authorization: `Bearer ${user.authdata}` };
     } else {
         return {};
     }

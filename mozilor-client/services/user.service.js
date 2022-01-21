@@ -41,7 +41,8 @@ function register(user) {
 
 function getProductlist() {
     
-    return fetchWrapper.post(`${productUrl}/list`);
+    return fetchWrapper.CusPost(`${productUrl}/list`);
+    
 }
 
 

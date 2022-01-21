@@ -9,15 +9,19 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.7.1",
+    "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "express-jwt": "^6.1.0",
     "jsonwebtoken": "^8.5.1",
     "next": "^11.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-data-table-component": "^6.11.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.12.1",
     "rxjs": "^7.3.0",
+    "styled-components": "^5.1.1",
+    "xlsx": "^0.16.6",
     "yup": "^0.32.9"
   },
   "devDependencies": {

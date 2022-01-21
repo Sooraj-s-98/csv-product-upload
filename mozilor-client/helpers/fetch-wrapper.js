@@ -1,13 +1,14 @@
 import getConfig from 'next/config';
 
 import { userService } from '../services';
-
+import axios from 'axios';
 const { publicRuntimeConfig } = getConfig();
 
 export const fetchWrapper = {
     get,
     post,
     put,
+    CusPost,
     delete: _delete
 };
 
@@ -56,6 +57,18 @@ function authHeader(url) {
     } else {
         return {};
     }
+}
+
+function CusPost(url,data){
+    const user = userService.userValue
+    let res=  axios.post(`${url}`, {
+       data
+    }, {
+      headers: {
+        'Authorization': `Bearer ${user.token}` 
+      }
+    })
+    return res;
 }
 
 function handleResponse(response) {

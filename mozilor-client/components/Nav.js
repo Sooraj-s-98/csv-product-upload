@@ -18,6 +18,7 @@ const Nav=()=> {
         <nav className="navbar navbar-expand navbar-dark bg-dark">
             <div className="navbar-nav">
                 <a href="/" exact className="nav-item nav-link">Home</a>
+                <a href="/upload" exact className="nav-item nav-link">Upload</a>
                 <a onClick={logout} className="nav-item nav-link">Logout</a>
             </div>
         </nav>

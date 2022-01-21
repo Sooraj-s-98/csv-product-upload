@@ -15,11 +15,10 @@ export default function Home() {
         listProduct();
       }
     
-}, []);
+}, [user]);
 const listProduct=async ()=>{
   let response=await userService.getProductlist();
-  console.log("response", response)
-    // setProducts(response);
+    setProducts(response.data.data);
 }
   return (
     <div className={styles.container}>
@@ -37,12 +36,11 @@ const listProduct=async ()=>{
           Get started by uploading{' '}
      
         </p>
-<button onClick={()=>listProduct()}> check</button>
         <div className={styles.grid}>
           {products.map(product =>
                     <div  className={styles.card}>
                     <h2>{product.product_name} &rarr;</h2>
-                    <p>Find in-depth information about Next.js features and API.</p>
+                    <p>{product.description}</p>
                   </div>
             )}
 

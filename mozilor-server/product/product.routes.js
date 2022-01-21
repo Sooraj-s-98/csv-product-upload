@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const csvController = require("./csv.controller");
 const multer = require("multer");
+const fs = require("fs");
+const csv = require("fast-csv");
 
 global.__basedir = __dirname;
 
@@ -28,14 +30,14 @@ const upload = multer({ storage: storage, fileFilter: csvFilter });
 router.post('/upload',
 upload.single("file"), (req, res) => {
     try {
-        if (req.file == undefined) {
+        if (req.files.file == undefined) {
             return res.status(400).send({
                 message: "Please upload a CSV file!"
             });
         }
 
         let products = [];
-        let filePath = __basedir + '/uploads/' + req.file.filename;
+        let filePath = __basedir + '/uploads/' + req.files.file.name;
         fs.createReadStream(filePath)
             .pipe(csv.parse({ headers: true }))
             .on("error", (error) => {

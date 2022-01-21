@@ -61,10 +61,9 @@ function authHeader(url) {
 
 function CusPost(url,data){
     const user = userService.userValue
-    let res=  axios.post(`${url}`, {
-       data
-    }, {
+    let res=  axios.post(`${url}`, data, {
       headers: {
+        'Content-Type':'multipart/form-data',
         'Authorization': `Bearer ${user.token}` 
       }
     })

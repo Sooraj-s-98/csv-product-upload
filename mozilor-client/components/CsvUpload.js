@@ -70,8 +70,10 @@ function CsvUpload() {
 
   const UploadCsv=()=>{
   try{
+    console.log("uploadData csvFile",csvFile)
     var uploadData = new FormData();
     uploadData.append("file",csvFile);
+    console.log("uploadData",uploadData)
     fetchWrapper.CusPost('http://localhost:4000/product/upload',uploadData )
   }
   catch(e){

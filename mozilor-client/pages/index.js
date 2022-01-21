@@ -6,13 +6,21 @@ import { userService } from '../services';
 export default function Home() {
 
   const [products, setProducts]=useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-   let response= userService.getProductlist();
-   console.log("response", response);
-  },[])
-console.log("userService", userService)
+    const subscription = userService.user.subscribe(x => setUser(x));
 
+      if(user){
+        listProduct();
+      }
+    
+}, []);
+const listProduct=async ()=>{
+  let response=await userService.getProductlist();
+  console.log("response", response)
+    // setProducts(response);
+}
   return (
     <div className={styles.container}>
       <Head>
@@ -29,7 +37,7 @@ console.log("userService", userService)
           Get started by uploading{' '}
      
         </p>
-
+<button onClick={()=>listProduct()}> check</button>
         <div className={styles.grid}>
           {products.map(product =>
                     <div  className={styles.card}>

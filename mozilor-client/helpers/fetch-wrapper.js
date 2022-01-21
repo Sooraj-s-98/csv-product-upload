@@ -49,10 +49,10 @@ function _delete(url) {
 
 function authHeader(url) {
     const user = userService.userValue;
-    const isLoggedIn = user && user.authdata;
+    const isLoggedIn = user && user.token;
     const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
     if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${user.authdata}` };
+        return { Authorization: `Bearer ${user.token}` };
     } else {
         return {};
     }

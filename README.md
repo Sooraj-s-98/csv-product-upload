@@ -19,6 +19,20 @@ run  server
  npm run dev
  
  open 
+ 
+ server
+ 
+1. register
+  ![image](https://user-images.githubusercontent.com/52352285/151004114-5a5b6860-61f8-4fe0-a829-6d55d1327493.png)
+2. login
+ ![image](https://user-images.githubusercontent.com/52352285/151004441-b8bb7e9c-8e90-4b48-b7b1-a0e0d0f6e267.png)
+3. upload product
+
+ ![image](https://user-images.githubusercontent.com/52352285/151005161-b46515af-e7e1-4ce0-8ab0-2b15e1a40c0e.png)
+4. list product
+  ![image](https://user-images.githubusercontent.com/52352285/151005396-45d58a6c-2a79-4d3d-ae74-28c7fc91a5e4.png)
+
+ 
  http://localhost:3000
  
  1. home 
